@@ -1,0 +1,17 @@
+vault_cfg:
+  secrets:
+    - token.yaml 
+  clusters:
+    master:
+      url: ""
+    ocp4:
+      url: ""
+  actions:
+    master_import:
+      - conf:  "master.yaml"
+        type: import
+      - conf: "master_sync.yaml"
+        type: sync
+    migration:
+      - conf:  "oc.yaml"
+        type: import

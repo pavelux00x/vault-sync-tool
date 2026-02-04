@@ -1,0 +1,3 @@
+conf:
+  - /oc/vault/common/tool/inventory.yaml 
+  - /oc/vault/common/tool/token.yaml

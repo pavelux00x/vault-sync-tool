@@ -1,0 +1,6 @@
+vault_cfg:
+  clusters:
+    master:
+      token: ""
+    ocp4:
+      token: ""
