@@ -1,7 +1,3 @@
-# common/tool
-
-  * folder used for store scripts used for vault
-
 # Backup / Import / Sync / List secrets
 
 ### Utils
