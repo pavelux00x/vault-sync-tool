@@ -17,7 +17,6 @@ help:
 	@echo "=================================="
 	@echo
 	@echo "#Want to apply some configurations? Check the inventory.yaml file"
-	@echo "cat $(INVENTORY)"
 	@echo
 	@echo "#Current clusters"
 	@$(foreach node,$(VAULT_NODES), echo "NODE=$(node)";) 
