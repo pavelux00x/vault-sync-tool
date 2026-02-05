@@ -2,6 +2,14 @@
 
 A utility for managing secrets across Vault clusters with support for backup, import, sync, and list operations.
 
+
+## Roadmap
+
+### Coming Soon
+
+- **SSL/TLS Verification**: 
+
+
 ## Quick Start
 
 ```bash
