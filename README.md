@@ -32,7 +32,7 @@ Provide Vault tokens for each cluster in `token.yaml`:
 > **Important:** The cluster names in `token.yaml` must match exactly with the cluster names defined in `inventory.yaml`.
 
 ```bash
-cat token.yaml # 
+cat token.yaml
 ```
 
 
