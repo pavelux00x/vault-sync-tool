@@ -49,8 +49,8 @@ def client(args,inventory=None,method=None,source=None,target=None):
 	global jobs
 	if inventory != None:
 		file_check(inventory)
-vault_cfg,{}).get("clusters",{}).keys())
-vault_cfg,{}).get("secrets") 
+	clusters = list(final_structure.get("vault_cfg",{}).get("clusters",{}).keys())
+	secrets = final_structure.get("vault_cfg",{}).get("secrets") 
 	for sec in secrets:
 		file_check(sec)	
 		with open(sec) as f:
@@ -60,8 +60,8 @@ vault_cfg,{}).get("secrets")
 		if args.src not in clusters:
 			print(f"{args.src} not in inventory")
 			exit(1)
-vault_cfg,{}).get("clusters",{}).get(args.src,{}).get("url")
-vault_cfg,{}).get("clusters",{}).get(args.src,{}).get("token")
+		url = final_structure.get("vault_cfg",{}).get("clusters",{}).get(args.src,{}).get("url")
+		token = final_structure.get("vault_cfg",{}).get("clusters",{}).get(args.src,{}).get("token")
 		if  not url or not token:
 			print("No Token / Url Provided")
 			sys.exit(1)	
@@ -72,10 +72,10 @@ vault_cfg,{}).get("clusters",{}).get(args.src,{}).get("token")
 		else:
 			mount_point = [args.src]
 	else:
-vault_cfg,{}).get("clusters",{}).get(source,{}).get("token") 
-vault_cfg,{}).get("clusters",{}).get(target,{}).get("token") 
-vault_cfg,{}).get("clusters",{}).get(source,{}).get("url") 
-vault_cfg,{}).get("clusters",{}).get(target,{}).get("url") 
+		token_client = final_structure.get("vault_cfg",{}).get("clusters",{}).get(source,{}).get("token") 
+		token_target = final_structure.get("vault_cfg",{}).get("clusters",{}).get(target,{}).get("token") 
+		url_client = final_structure.get("vault_cfg",{}).get("clusters",{}).get(source,{}).get("url") 
+		url_target = final_structure.get("vault_cfg",{}).get("clusters",{}).get(target,{}).get("url") 
 		if  not url_client or not token_client or not token_target or not url_target:
 			print("No Token / Url Provided")
 			sys.exit(1)	
@@ -202,7 +202,7 @@ def handle_restore(args):
 
 def handle_sync(args):
 	global final_structure
-vault_cfg).get("actions").keys())
+	actions = list(final_structure.get("vault_cfg").get("actions").keys())
 	import_files = check_type_files('sync',actions)
 	for file in import_files:
 		path_list = []
@@ -271,7 +271,7 @@ def sync_single_secret(client_src, client_dst, src_mnt, src_path, dst_mnt, dst_p
 def check_type_files(type,actions):
 	import_files = []
 	for act in actions:
-vault_cfg).get("actions").get(act) 
+		tasks  = final_structure.get("vault_cfg").get("actions").get(act) 
 		for task in tasks:
 			if task["type"] == type:
 				if os.path.isfile(task["conf"]):
@@ -290,7 +290,7 @@ def handle_import(args):
 	grouped_secrets = {} 
 
 	# Get all files and check if type import exists
-vault_cfg).get("actions").keys())
+	actions = list(final_structure.get("vault_cfg").get("actions").keys())
 	import_files = check_type_files('import',actions)
 
 	# Check if target match
@@ -374,7 +374,7 @@ def merge_structure(file):
 
 
 merge_structure(main_config_file)
-parser = argparse.ArgumentParser(description="HashiCorp Vault Tool")
+parser = argparse.ArgumentParser(description="HashiCorp Vault Pavel Tool")
 subparsers = parser.add_subparsers(dest='command', required=True, help='Available commands')
 parser_backup = subparsers.add_parser('backup', help='Backup logic')
 parser_backup.add_argument('--src', required=True,help='Openshift / Master vault name')
