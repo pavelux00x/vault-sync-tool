@@ -1,6 +1,6 @@
 vault_cfg:
   secrets:
-    - token.yaml 
+  - token.yaml
   clusters:
     master:
       url: ""
@@ -8,10 +8,10 @@ vault_cfg:
       url: ""
   actions:
     master_import:
-      - conf:  "master.yaml"
-        type: import
-      - conf: "master_sync.yaml"
-        type: sync
+    - conf: "master.yaml"
+      type: import
+    - conf: "master_sync.yaml"
+      type: sync
     migration:
-      - conf:  "oc.yaml"
-        type: import
+    - conf: "oc.yaml"
+      type: import

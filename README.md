@@ -24,15 +24,15 @@ Tasks are defined as a list of operations to execute sequentially:
 
 ```yaml
 example1_import_sync:
-  - conf: "/oc/vault/resources/secrets/master.yaml"
+  - conf: "/user/vault/resources/secrets/master.yaml"
     type: import
-  - conf: "/oc/vault/resources/secrets/master-test.yaml"
+  - conf: "/user/vault/resources/secrets/master-test.yaml"
     type: sync
 
 example2_sync_import:
-  - conf: "/oc/vault/resources/secrets/ocp4.yaml"
+  - conf: "/user/vault/resources/secrets/ocp4.yaml"
     type: import
-  - conf: "/oc/vault/resources/sync/ocp4.yaml"
+  - conf: "/user/vault/resources/sync/ocp4.yaml"
     type: sync
 ```
 
@@ -65,7 +65,7 @@ target: "master/ocp4/"  # Destination cluster + path
 
 secrets:
   paths:
-    - /oc/etc/ns/jenkins-cicd/secret/*  # Local path containing secrets
+    - /user/etc/ns/jenkins-cicd/secret/*  # Local path containing secrets
 ```
 
 | Field | Description |
@@ -80,7 +80,7 @@ Synchronize secrets between Vault clusters.
 
 ```yaml
 kind: "sync"
-source: "ocp4"   # Source Vault cluster
+source: "userp4"   # Source Vault cluster
 target: "master" # Destination Vault cluster
 
 jobs:
