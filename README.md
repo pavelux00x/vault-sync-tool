@@ -1,52 +1,91 @@
-# Backup / Import / Sync / List secrets
+# Vault Secrets Manager
 
-### Utils
+A utility for managing secrets across Vault clusters with support for backup, import, sync, and list operations.
+
+## Quick Start
 
 ```bash
 make help
+```
 
-``` 
+## Configuration
 
+### Inventory File
 
-### File used for define clusters and actions 
+Define your clusters and actions in `inventory.yaml`:
+
 ```bash
 cat inventory.yaml
+```
 
-``` 
+### Task Definition
 
-### Actions inside inventory.yaml
+Tasks are defined as a list of operations to execute sequentially:
+
 ```yaml
-example1_import_sync: #Task name
-  - conf:  "/oc/vault/resources/secrets/master.yaml" #File to source
-    type: import #Operation to do with the file
-  - conf:  "/oc/vault/resources/secrets/master-test.yaml"
+example1_import_sync:
+  - conf: "/oc/vault/resources/secrets/master.yaml"
+    type: import
+  - conf: "/oc/vault/resources/secrets/master-test.yaml"
     type: sync
+
 example2_sync_import:
-  - conf:  "/oc/vault/resources/secrets/ocp4.yaml"
+  - conf: "/oc/vault/resources/secrets/ocp4.yaml"
     type: import
   - conf: "/oc/vault/resources/sync/ocp4.yaml"
     type: sync
 ```
 
-### Import secrets 
+## Usage
+
+Execute operations defined in your inventory file using Make targets:
+
+| Command | Description |
+|---------|-------------|
+| `make <clustername>_import` | Import secrets to the specified cluster based on inventory configuration |
+| `make <clustername>_sync` | Sync secrets for the specified cluster based on inventory configuration |
+| `make <clustername>_backup` | Backup secrets from the specified cluster |
+| `make <clustername>_list` | List secrets in the specified cluster |
+
+**Example:**
+```bash
+make example1_import_sync  # Executes import and sync operations
+make example2_sync_import  # Executes sync and import operations
+```
+
+## Operations
+
+### Import Secrets
+
+Import secrets from local files to a Vault cluster.
+
 ```yaml
-kind: "import" #import or sync
-target: "master/ocp4/" #Destination cluster + path
+kind: "import"
+target: "master/ocp4/"  # Destination cluster + path
 
 secrets:
   paths:
-    - /oc/etc/ns/jenkins-cicd/secret/* # Local path where to find secrets
+    - /oc/etc/ns/jenkins-cicd/secret/*  # Local path containing secrets
 ```
 
-### Sync secrets
+| Field | Description |
+|-------|-------------|
+| `kind` | Operation type (`import`) |
+| `target` | Destination cluster and path |
+| `secrets.paths` | List of local paths to import |
+
+### Sync Secrets
+
+Synchronize secrets between Vault clusters.
+
 ```yaml
-kind: "sync" #sync or import
-source: "ocp4" #source vault cluster
-target: "master" #destination vault cluster
+kind: "sync"
+source: "ocp4"   # Source Vault cluster
+target: "master" # Destination Vault cluster
 
 jobs:
-  - source_path: "ocp4/test-vault/" #secret stored in source
-    destination_path: "ocp4/test-vault/" #where the secret will be stored in target cluster
+  - source_path: "ocp4/test-vault/"
+    destination_path: "ocp4/test-vault/"
 
   - source_path:
       - ocp4/test-backup/test-backup-sync
@@ -54,3 +93,12 @@ jobs:
       - ocp4/test-backup/test-backup-sync3
     destination_path: "ocp4/test-backup/"
 ```
+
+| Field | Description |
+|-------|-------------|
+| `kind` | Operation type (`sync`) |
+| `source` | Source Vault cluster |
+| `target` | Destination Vault cluster |
+| `jobs[].source_path` | Path(s) in source cluster (string or list) |
+| `jobs[].destination_path` | Path in destination cluster |
+
