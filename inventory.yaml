@@ -4,12 +4,9 @@ vault_cfg:
   clusters:
     vault-1:
       url: "http://127.0.0.1:8201"
-#  actions:
-#    master_import:
-#    - conf: "master.yaml"
-#      type: import
-#    - conf: "master_sync.yaml"
-#      type: sync
-#    migration:
-#    - conf: "oc.yaml"
-#      type: import
+    vault-2:
+      url: "http://127.0.0.1:8202"
+  actions:
+    master_import:
+    - conf: "resources/master.yaml"
+      type: import
