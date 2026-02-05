@@ -23,18 +23,26 @@ cat inventory.yaml
 Tasks are defined as a list of operations to execute sequentially:
 
 ```yaml
-example1_import_sync:
-  - conf: "/user/vault/resources/secrets/master.yaml"
-    type: import
-  - conf: "/user/vault/resources/secrets/master-test.yaml"
-    type: sync
+actions:
+  example1_import_sync:
+    - conf: "/user/vault/resources/secrets/master.yaml"
+      type: import
+    - conf: "/user/vault/resources/secrets/master-test.yaml"
+      type: sync
 
-example2_sync_import:
-  - conf: "/user/vault/resources/secrets/ocp4.yaml"
-    type: import
-  - conf: "/user/vault/resources/sync/ocp4.yaml"
-    type: sync
+  example2_sync_import:
+    - conf: "/user/vault/resources/secrets/ocp4.yaml"
+      type: import
+    - conf: "/user/vault/resources/sync/ocp4.yaml"
+      type: sync
 ```
+
+| Field | Description |
+|-------|-------------|
+| `actions.<custom_name>` | Custom identifier for the action sequence |
+| `conf` | Path to the configuration file for the operation |
+| `type` | Operation type (`import` or `sync`) |
+
 
 ## Usage
 
