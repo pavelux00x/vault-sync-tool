@@ -110,3 +110,28 @@ jobs:
 | `jobs[].source_path` | Path(s) in source cluster (string or list) |
 | `jobs[].destination_path` | Path in destination cluster |
 
+
+
+### Start docker
+
+```bash
+#Start
+for i in {1,2}; do 
+  $(which docker) run -dit -p 820$i:8200 --name vault-$i hashicorp/vault:latest;
+done
+
+#Fetch these tokens to use in inventory.yaml
+for i in {1,2}; do 
+  token=$($(which docker) logs vault-$i | grep "Root Token" | awk '{print $NF}')
+  echo "Token vault $i: $token" 
+done
+
+#Stop
+for i in {1,2}; do 
+  $(which docker) rm -f vault-$i
+done
+
+
+```
+
+---
