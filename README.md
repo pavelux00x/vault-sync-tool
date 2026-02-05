@@ -15,8 +15,18 @@ make help
 Define your clusters and actions in `inventory.yaml`:
 
 ```bash
-cat inventory.yaml
+cat inventory.yaml # You will see an example inventory file with cluster definitions and action sequences.
 ```
+
+### Token File
+
+Provide Vault tokens for each cluster in `token.yaml`:
+> **Important:** The cluster names in `token.yaml` must match exactly with the cluster names defined in `inventory.yaml`.
+
+```bash
+cat token.yaml # 
+```
+
 
 ### Task Definition
 
