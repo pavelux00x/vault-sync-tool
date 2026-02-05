@@ -374,7 +374,7 @@ def merge_structure(file):
 
 
 merge_structure(main_config_file)
-parser = argparse.ArgumentParser(description="HashiCorp Vault Pavel Tool")
+parser = argparse.ArgumentParser(description="HashiCorp Vault Tool")
 subparsers = parser.add_subparsers(dest='command', required=True, help='Available commands')
 parser_backup = subparsers.add_parser('backup', help='Backup logic')
 parser_backup.add_argument('--src', required=True,help='Openshift / Master vault name')
