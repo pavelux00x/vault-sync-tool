@@ -2,6 +2,8 @@
 USERF := $(shell cat .user 2>/dev/null)
 USER := $(if $(strip $(USERF)),$(strip $(USERF)),default_user)
 PYTHON_VERSION := python3.12
+PIP := pip3.12
+GUI_FOLDER := /$(USER)/vault/export/tool/gui/vault-cluster-manager
 INVENTORY := /$(USER)/vault/export/tool/inventory.yaml
 DEFAULT_DIR := backup_vault/
 VAULT_NODES := $(shell cat token.yaml 2>/dev/null | $(PYTHON_VERSION) -c 'import json, sys, yaml; y=yaml.safe_load(sys.stdin.read()); print(json.dumps(y))' | jq -cr '."vault_cfg".clusters | keys[]')
@@ -41,3 +43,10 @@ help:
 
 nodes:
 	@echo $(VAULT_NODES)
+
+install-gui:
+	@$(PIP) install -r $(GUI_FOLDER)/requirements.txt
+
+start-gui:
+	@$(PYTHON_VERSION) $(GUI_FOLDER)/src/main.py
+

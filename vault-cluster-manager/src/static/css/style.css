@@ -1,0 +1,245 @@
+:root {
+    --vault-primary: #000000;
+    --vault-secondary: #ffcf25;
+    --vault-success: #2eb872;
+    --vault-danger: #dc3545;
+}
+
+body {
+    background-color: #f5f5f5;
+    font-size: 14px;
+}
+
+.navbar {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%) !important;
+}
+
+.navbar-brand {
+    font-weight: 600;
+}
+
+.card {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 8px;
+}
+
+.card-header {
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    font-weight: 600;
+    padding: 12px 16px;
+}
+
+/* Cluster List */
+.cluster-item {
+    cursor: pointer;
+    transition: all 0.2s;
+    border-left: 3px solid transparent;
+}
+
+.cluster-item:hover {
+    background-color: #f8f9fa;
+}
+
+.cluster-item.active {
+    background-color: #e7f1ff;
+    border-left-color: #0d6efd;
+}
+
+.cluster-item .status-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.cluster-item .status-indicator.connected {
+    background-color: var(--vault-success);
+}
+
+.cluster-item .status-indicator.disconnected {
+    background-color: var(--vault-danger);
+}
+
+/* Secrets Tree */
+.secrets-tree-container {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.tree-node {
+    padding: 4px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin: 2px 0;
+    display: flex;
+    align-items: center;
+}
+
+.tree-node:hover {
+    background-color: #f0f0f0;
+}
+
+.tree-node.selected {
+    background-color: #e7f1ff;
+}
+
+.tree-node .node-icon {
+    margin-right: 8px;
+    color: #666;
+}
+
+.tree-node.folder .node-icon {
+    color: #ffc107;
+}
+
+.tree-node.secret .node-icon {
+    color: #0d6efd;
+}
+
+.tree-children {
+    margin-left: 20px;
+    border-left: 1px dashed #ddd;
+    padding-left: 10px;
+}
+
+.tree-toggle {
+    width: 16px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 4px;
+    cursor: pointer;
+}
+
+/* Secret Content */
+.secret-key-value {
+    display: flex;
+    margin-bottom: 8px;
+    padding: 8px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+.secret-key {
+    font-weight: 600;
+    color: #333;
+    min-width: 150px;
+    word-break: break-all;
+}
+
+.secret-value {
+    flex: 1;
+    font-family: 'Monaco', 'Menlo', monospace;
+    font-size: 12px;
+    word-break: break-all;
+    position: relative;
+}
+
+.secret-value.masked {
+    color: #999;
+}
+
+.toggle-visibility {
+    cursor: pointer;
+    margin-left: 8px;
+    color: #666;
+}
+
+.toggle-visibility:hover {
+    color: #333;
+}
+
+/* Mount Points Table */
+#mountsTable tr {
+    cursor: pointer;
+}
+
+#mountsTable tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Badges */
+.badge-kv {
+    background-color: #6c757d;
+}
+
+.badge-kv-v2 {
+    background-color: #0d6efd;
+}
+
+/* Toast customization */
+.toast {
+    min-width: 300px;
+}
+
+.toast.success .toast-header {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.toast.error .toast-header {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Sync panel */
+.sync-arrow {
+    text-align: center;
+    padding: 10px;
+    color: #666;
+    font-size: 24px;
+}
+
+/* Loading spinner */
+.spinner-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+/* Filter input */
+#secretsFilter {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+}
+
+#secretsFilter:focus {
+    background-color: #fff;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a1a1a1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .secrets-tree-container {
+        max-height: 300px;
+    }
+}
