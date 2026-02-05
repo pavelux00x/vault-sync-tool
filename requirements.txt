@@ -1,2 +1,4 @@
 hvac==2.4.0 
 requests
+argparse
+PyYAML
