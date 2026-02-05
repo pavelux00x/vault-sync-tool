@@ -66,11 +66,8 @@ def client(args,inventory=None,method=None,source=None,target=None):
 			print("No Token / Url Provided")
 			sys.exit(1)	
 		client = hvac.Client(url=url, token=token,verify=False)
-		if args.src == "master": 
-			response = client.sys.list_mounted_secrets_engines()['data']
-			mount_point = (sorted(response.keys()))
-		else:
-			mount_point = [args.src]
+		response = client.sys.list_mounted_secrets_engines()['data']
+		mount_point = (sorted(response.keys()))
 	else:
 		token_client = final_structure.get("vault_cfg",{}).get("clusters",{}).get(source,{}).get("token") 
 		token_target = final_structure.get("vault_cfg",{}).get("clusters",{}).get(target,{}).get("token") 
